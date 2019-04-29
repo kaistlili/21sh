@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 14:37:16 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/29 15:24:31 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/29 16:09:29 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,33 +21,33 @@ t_signal g_sig[] =\
 	{SIGINT, &nothing},
 	{SIGQUIT, &sigcatch},
 	//{SIGILL, &sigcatch},
-	{SIGTRAP, &sigcatch}, // ?
+	//{SIGTRAP, &sigcatch},
 	//{SIGABRT, &sigcatch},
-	{SIGEMT, &sigcatch}, // ?
+	//{SIGEMT, &sigcatch},
 	//{SIGFPE, &sigcatch},
 	{SIGKILL, &sigcatch},
 	//{SIGBUS, &sigcatch},
 	//{SIGSEGV, &sigcatch},
 	//{SIGSYS, &sigcatch},
-	{SIGPIPE, &sigcatch},
-	{SIGALRM, &sigcatch},
+	//{SIGPIPE, &sigcatch},
+	//{SIGALRM, &sigcatch},
 	{SIGTERM, &sigcatch},
-	{SIGURG, &sigcatch},
+	//{SIGURG, &sigcatch},
 	{SIGSTOP, &sigcatch},
 	{SIGTSTP, &sigcatch},
 	{SIGCONT, &sigcatch},
 	//{SIGCHLD, &sigcatch},
-	{SIGTTIN, &sigcatch},
-	{SIGTTOU, &sigcatch},
-	{SIGIO, &sigcatch},
-	{SIGXCPU, &sigcatch},
-	{SIGXFSZ, &sigcatch},
-	{SIGVTALRM, &sigcatch},
-	{SIGPROF, &sigcatch},
+	//{SIGTTIN, &sigcatch},
+	//{SIGTTOU, &sigcatch},
+	//{SIGIO, &sigcatch},
+	//{SIGXCPU, &sigcatch},
+	//{SIGXFSZ, &sigcatch},
+	//{SIGVTALRM, &sigcatch},
+	//{SIGPROF, &sigcatch},
 	{SIGWINCH, &resize},
-	{SIGINFO, &sigcatch},
-	{SIGUSR1, &sigcatch},
-	{SIGUSR2, &sigcatch},
+	//{SIGINFO, &sigcatch},
+	//{SIGUSR1, &sigcatch},
+	//{SIGUSR2, &sigcatch},
 	{0, sigcatch}
 };
 
@@ -77,6 +77,18 @@ void	setsig(void)
 	while (g_sig[i].sig)
 	{
 		signal(g_sig[i].sig, g_sig[i].func);
+		i++;
+	}
+}
+
+void	unsetsig(void)
+{
+	int		i;
+
+	i = 0;
+	while (g_sig[i].sig)
+	{
+		signal(g_sig[i].sig, SIG_DFL);
 		i++;
 	}
 }
