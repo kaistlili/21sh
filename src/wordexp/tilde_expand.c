@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 20:19:43 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/15 17:31:29 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/09 21:39:01 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ char	*quote_home(char *str)
 {
 	char *new;
 
-	if (!(new = ft_strnew(ft_strlen(str) + 2)))
+	new = ft_strnew(ft_strlen(str) + 2);
+	if (!new)
 		return (NULL);
 	new[0] = '\'';
 	ft_strcpy(new + 1, str);

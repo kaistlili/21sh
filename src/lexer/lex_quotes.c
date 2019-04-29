@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 21:23:31 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/25 19:08:04 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/15 20:34:28 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 int	handle_backslash(t_lexer *lx_st)
 {
 	int ret;
-
+	
 	if (*(lx_st->cursor + 1) == 0)
 		return (str_putc(&(lx_st->cursor), &(lx_st->token->data)));
 	if (*(lx_st->cursor + 1) == '\n')

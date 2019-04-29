@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 19:24:29 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/15 17:29:45 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/04 15:32:46 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ char			*handle_pwd_l(void)
 		return (NULL);
 	if (env_pwd && (!path_access(env_pwd)))
 	{
-		if (!(ret = ft_strdup(env_pwd)))
+		ret = ft_strdup(env_pwd);
+		if (ret == NULL)
 			return (p_pwd);
 		if (p_pwd)
 			free(p_pwd);

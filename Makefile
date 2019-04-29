@@ -6,7 +6,7 @@
 #    By: apeyret <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/04/29 14:24:18 by ktlili           ###   ########.fr        #
+#    Updated: 2019/04/29 14:45:08 by apeyret          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME =		21sh
 
 CC =		clang	
 
-CFLAGS =	-I inc/ -I lib/inc/ -Wall -Werror -Wextra -g
+CFLAGS =	-I inc/ -I libft/inc/ -Wall -Werror -Wextra -ggdb
 
 INC_DIR =	inc
 
@@ -84,13 +84,14 @@ SRC_FILE =	builtins/cd_l_p.c			\
 			lexer/lexer.c				\
 			lexer/lexer_tools.c			\
 			lexer/rev_lex.c				\
+			lexer/memerror.c			\
 			lexer/lex_quotes.c			\
 			lexer/lex_op.c				\
 			lexer/token_tools.c			\
 			parser/parser_tools_2.c		\
 			parser/parser_free_fn.c		\
 			parser/parser_ast.c			\
-			parser/parser_newline.c		\
+			parser/refactor_parser.c	\
 			parser/parser_cmd_misc.c	\
 			parser/parser_complete_cmd.c\
 			parser/parser_expect_and_or.c\
@@ -100,10 +101,10 @@ SRC_FILE =	builtins/cd_l_p.c			\
 			parser/sh_parser.c			\
 			parser/parser_heredoc.c		\
 			parser/light_parser.c		\
-			parser/parser_free.c		\
 			hashtable/hashtable.c		\
 			hashtable/ht_files.c		\
 			hashtable/ht_spawnbin.c		\
+			readline/cmdisin.c			\
 			readline/env_autoclp.c		\
 			readline/files.c			\
 			readline/files_right.c		\
@@ -160,18 +161,18 @@ norm:
 
 $(NAME): $(OBJ)
 	@printf "\033[0;32m[21sh] Compilation [OK]\033[0;0m\n"
-	@make -C lib/
-	@$(CC) $(CFLAGS) -ltermcap $(DEBUG) $(OBJ) lib/libft.a -o $(NAME)
+	@make -C libft/
+	@$(CC) $(CFLAGS) -ltermcap $(DEBUG) $(OBJ) libft/libft.a -o $(NAME)
 
 clean:
-	@make clean -C lib/
+	@make clean -C libft/
 	@/bin/rm -f $(OBJ)
 	@/bin/rm -rf $(OBJ_DIR)
 	@printf "\033[0;31m[21sh] Deleted *.o\033[0;0m\n"
 
 fclean: clean
 	@/bin/rm -f $(NAME)
-	@/bin/rm -f lib/libft.a
+	@/bin/rm -f libft/libft.a
 	@printf "\033[0;31D[21sh] Deleted 21sh\033[0;0m\n"
 
 re: fclean all

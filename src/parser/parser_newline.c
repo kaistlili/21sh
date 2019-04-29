@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 19:39:13 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/24 16:00:31 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/10 19:39:16 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,20 @@ int	expect_linebreak(t_parser *parser)
 	if ((ret = expect_newline_lst(parser)) != SYNERR)
 		return (ret);
 	return (0);
+}
+
+int	expect_filename(t_parser *parser)
+{
+	int ret;
+
+	if (parser->current->type == WORD)
+	{
+		parser->current->type = FILENAME;
+		if (build_redir(parser->current, &(parser->current_redir)) == MEMERR)
+			return (MEMERR);
+		if ((ret = next_token(parser)))
+			return (ret);
+		return (0);
+	}
+	return (SYNERR);
 }

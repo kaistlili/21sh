@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 16:46:34 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/15 17:26:21 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/12 15:26:42 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,7 @@ t_token	*ft_split_word(char *split_at)
 	char	*half;
 	t_token	*new;
 
-	if (!(half = ft_strdup(split_at)))
-		return (NULL);
+	half = ft_strdup(split_at);
 	*split_at = 0;
 	if (!(new = new_token(WORD)))
 		return (NULL);

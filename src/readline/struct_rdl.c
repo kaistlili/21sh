@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 15:15:46 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/15 17:22:38 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/01 18:19:58 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ int		rdlinit(t_rdl *rdl, char *prompt)
 
 void	rdldel(t_rdl *rdl, int curs)
 {
-	if (curs > rdl->size || rdl->size < 0
-		|| (curs < rdl->curs && rdl->curs <= 0)
+	if (curs > rdl->size || rdl->size < 0 ||
+		(curs < rdl->curs && rdl->curs <= 0)
 		|| (curs >= rdl->curs && rdl->size == curs))
 		return ;
 	ft_strcpy(rdl->str + curs, rdl->str + curs + 1);
