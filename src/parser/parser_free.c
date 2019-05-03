@@ -1,34 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal.c                                           :+:      :+:    :+:   */
+/*   memerror.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/04 14:37:16 by apeyret           #+#    #+#             */
-/*   Updated: 2019/05/03 09:42:18 by ktlili           ###   ########.fr       */
+/*   Created: 2019/04/01 13:49:01 by apeyret           #+#    #+#             */
+/*   Updated: 2019/04/25 19:25:42 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "readline.h"
+#include "ft_lexer.h"
 
-extern t_rdl g_rdl;
-
-void	resize(int sig)
+void	free_parser(t_parser *parser)
 {
-	(void)sig;
-	g_rdl.col = getcolumn();
-	reprint(&g_rdl, g_rdl.curs);
-}
-
-void	nothing(int sig)
-{
-	(void)sig;
-	write(1, "\n", 1);
-}
-
-void	setsig(void)
-{
-	signal(SIGWINCH, &resize);
-	signal(SIGINT, &nothing);
+	free_token_lst(parser->cmd.word_lst);
+	free_token_lst(parser->cmd.assign_lst);
+	free_redir_lst(parser->cmd.redir_lst);
+	free_token_lst(parser->head);
+	free_pipeline(parser->pipeline);
 }

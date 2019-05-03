@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 14:51:15 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/10 18:16:51 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/25 21:52:40 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,6 @@ int		parser_is_name_c(char c);
 int		next_squote(char *str, int index);
 int		next_dquote(char *str, int index);
 int		next_bslash(char *str, int index);
+int		wrapper_free_cmd(int ret, t_parser *parser);
 
 #endif

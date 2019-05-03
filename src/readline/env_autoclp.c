@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 17:28:00 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/06 18:04:08 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/15 17:27:53 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ t_list	*lstnewenv(char *var)
 	t_list	*lst;
 	char	*s;
 
-	s = ft_strndup(var, foundc(var, '='));
+	if (!(s = ft_strndup(var, foundc(var, '='))))
+		return (NULL);
 	lst = ft_lstnew(s, 0);
 	ft_strdel(&s);
 	return (lst);

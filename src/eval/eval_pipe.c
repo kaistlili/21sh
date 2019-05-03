@@ -6,18 +6,37 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 11:48:18 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/12 16:53:24 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/05/03 15:46:04 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_eval.h"
 
-int	pipe_recursion(t_cmd_tab *to, t_cmd_tab *from)
+int		wait_pipe(pid_t last, t_cmd_tab *cmd)
+{
+	int status;
+
+	signal(SIGINT, SIG_DFL);
+	signal(SIGWINCH, SIG_DFL);
+	waitpid(last, &status, WUNTRACED);
+	while (waitpid(0, NULL, WUNTRACED) > 0)
+		;
+	cmd->exit_status = (int)WEXITSTATUS(status);
+	return (0);
+}
+
+void	close_p(int pipes[2])
+{
+	close(pipes[0]);
+	close(pipes[1]);
+}
+
+int		pipe_recursion(t_cmd_tab *to, t_cmd_tab *from)
 {
 	int pipes[2];
 	int pid;
 
-	if ((pipe(pipes) != 0) || ((pid = fork()) == -1))
+	if (((to) && (pipe(pipes) != 0)) || ((pid = fork()) == -1))
 		return (MEMERR);
 	if (pid == 0)
 	{
@@ -25,40 +44,41 @@ int	pipe_recursion(t_cmd_tab *to, t_cmd_tab *from)
 		{
 			if (dup2(pipes[1], STDOUT_FILENO) == -1)
 				return (PIPEFAIL);
-			close(pipes[0]);
+			close_p(pipes);
 		}
 		spawn_in_pipe(from);
-		exit_wrap(0, from);
+		exit_wrap(from->exit_status, from);
 	}
 	if (to)
 	{
 		if (dup2(pipes[0], STDIN_FILENO) == -1)
 			return (PIPEFAIL);
-		close(pipes[1]);
-		return (pipe_recursion(to->next, to));
+		close_p(pipes);
+		pipe_recursion(to->next, to);
 	}
-	wait_wrapper(from, pid);
-	return (from->exit_status);
+	close(STDIN_FILENO);
+	return (wait_pipe(pid, from));
 }
 
-int	eval_pipe(t_cmd_tab *cmd)
+int		eval_pipe(t_cmd_tab *cmd)
 {
 	pid_t	pid;
-	int		ret;
 
 	pid = fork();
 	if (pid == -1)
 		return (-1);
 	if (pid == 0)
 	{
-		ret = pipe_recursion(cmd->next, cmd);
-		exit_wrap(ret, cmd);
+		pipe_recursion(cmd->next, cmd);
+		while (cmd->next)
+			cmd = cmd->next;
+		exit_wrap(cmd->exit_status, cmd);
 	}
 	wait_wrapper(cmd, pid);
 	return (0);
 }
 
-int	exec_pipeline(t_ast_node *tree)
+int		exec_pipeline(t_ast_node *tree)
 {
 	t_cmd_tab	*cmd_tab;
 	int			ret;

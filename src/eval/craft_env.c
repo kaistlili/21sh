@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 14:22:06 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/09 21:15:13 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/25 18:34:03 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ static char	**cpy_array(char **to, char **from)
 	i = 0;
 	while (from[i])
 	{
-		to[i] = ft_strdup(from[i]);
-		if (to[i] == NULL)
+		if (!(to[i] = ft_strdup(from[i])))
 			return (NULL);
 		i++;
 	}

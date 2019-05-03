@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/12 21:18:26 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/29 17:11:28 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/25 18:35:04 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,6 @@ int		ctrld(t_rdl *rdl, char *buf)
 		write(1, "\n", 1);
 		return (2);
 	}
+	ddel_cara(rdl, buf);
 	return (0);
 }

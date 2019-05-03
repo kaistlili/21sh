@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 19:24:29 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/04 15:32:46 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/05/03 16:05:32 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ char			*handle_pwd_l(void)
 	char *ret;
 
 	env_pwd = get_env_value("PWD");
-	p_pwd = getcwd(NULL, 0);
+	if (!(p_pwd = getcwd(NULL, 0)))
+		ft_dprintf(STDERR_FILENO, "21sh : cd : error getting current dir \n");
 	if ((p_pwd == NULL) && (env_pwd == NULL))
 		return (NULL);
 	if (env_pwd && (!path_access(env_pwd)))
 	{
-		ret = ft_strdup(env_pwd);
-		if (ret == NULL)
+		if (!(ret = ft_strdup(env_pwd)))
 			return (p_pwd);
 		if (p_pwd)
 			free(p_pwd);
@@ -82,7 +82,7 @@ int				cd_p(char *curpath, char *arg)
 	char	*old_pwd;
 
 	tmp_pwd = get_env_value("PWD");
-	if (chdir(curpath) != 0)
+	if (chdir(curpath))
 	{
 		cd_dispatch_err(arg, curpath);
 		return (0);

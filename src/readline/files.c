@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 14:48:16 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/01 18:30:54 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/15 17:25:27 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ t_list	*get_folex(char *token, int (*f)(char *file))
 		path = ft_strndup(token, exec - token);
 	else
 		path = ft_strdup(".");
+	if (!path)
+		return (NULL);
 	if (!(ptr = opendir(path)))
 		return (NULL);
 	lst = folderin(ptr, path, exec, f);

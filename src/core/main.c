@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:07:32 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/15 16:30:22 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/26 12:34:09 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,6 @@ void		global_del(void)
 	ft_tabdel(&g_sh.env);
 }
 
-void		sig_exit(int sig)
-{
-	exit_wrap(sig, NULL);
-}
-
 int			main(int ac, char **av, char **env)
 {
 	char		*line;
@@ -73,8 +68,8 @@ int			main(int ac, char **av, char **env)
 		return (MEMERR);
 	while (42)
 	{
-		if ((ret = read_fn("$> ", &line)) == CTRL_D ||
-				ret == MEMERR || ret < 0)
+		if ((ret = read_fn("$> ", &line)) == CTRL_D
+				|| ret == MEMERR || ret < 0)
 			break ;
 		if (((ret = run_command(line)) == SYNERR)
 				&& (g_sh.mode == MODEFILE))
