@@ -6,14 +6,14 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 11:48:18 by ktlili            #+#    #+#             */
-/*   Updated: 2019/05/05 17:45:53 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/05/05 18:56:45 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_eval.h"
 #include "sig.h"
 
-static void	close_pipes(int pipes[2])
+static void		close_pipes(int pipes[2])
 {
 	if (pipes)
 	{
@@ -39,7 +39,7 @@ static int		wait_pipe(pid_t last, t_cmd_tab *cmd)
 	return (0);
 }
 
-int		pipe_recursion(t_cmd_tab *to, t_cmd_tab *from)
+int				pipe_recursion(t_cmd_tab *to, t_cmd_tab *from)
 {
 	int pipes[2];
 	int pid;
@@ -68,7 +68,7 @@ int		pipe_recursion(t_cmd_tab *to, t_cmd_tab *from)
 	return (wait_pipe(pid, from));
 }
 
-int		eval_pipe(t_cmd_tab *cmd)
+int				eval_pipe(t_cmd_tab *cmd)
 {
 	pid_t	pid;
 
@@ -91,7 +91,7 @@ int		eval_pipe(t_cmd_tab *cmd)
 	return (0);
 }
 
-int		exec_pipeline(t_ast_node *tree)
+int				exec_pipeline(t_ast_node *tree)
 {
 	t_cmd_tab	*cmd_tab;
 	int			ret;
