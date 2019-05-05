@@ -6,18 +6,31 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 11:48:18 by ktlili            #+#    #+#             */
-/*   Updated: 2019/05/03 15:46:04 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/05/05 17:43:56 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_eval.h"
 
-int		wait_pipe(pid_t last, t_cmd_tab *cmd)
+static void	close_pipes(int pipes[2])
+{
+	if (pipes)
+	{
+		close(pipes[0]);
+		close(pipes[1]);
+	}
+	else
+	{
+		close(STDIN_FILENO);
+		close(STDOUT_FILENO);
+	}
+}
+
+static int		wait_pipe(pid_t last, t_cmd_tab *cmd)
 {
 	int status;
 
-	signal(SIGINT, SIG_DFL);
-	signal(SIGWINCH, SIG_DFL);
+	close_pipes(NULL);
 	waitpid(last, &status, WUNTRACED);
 	while (waitpid(0, NULL, WUNTRACED) > 0)
 		;
@@ -25,18 +38,12 @@ int		wait_pipe(pid_t last, t_cmd_tab *cmd)
 	return (0);
 }
 
-void	close_p(int pipes[2])
-{
-	close(pipes[0]);
-	close(pipes[1]);
-}
-
 int		pipe_recursion(t_cmd_tab *to, t_cmd_tab *from)
 {
 	int pipes[2];
 	int pid;
 
-	if (((to) && (pipe(pipes) != 0)) || ((pid = fork()) == -1))
+	if ((((to) && ((pipe(pipes) != 0))) || (pid = fork()) == -1))
 		return (MEMERR);
 	if (pid == 0)
 	{
@@ -44,19 +51,19 @@ int		pipe_recursion(t_cmd_tab *to, t_cmd_tab *from)
 		{
 			if (dup2(pipes[1], STDOUT_FILENO) == -1)
 				return (PIPEFAIL);
-			close_p(pipes);
+			close_pipes(pipes);
 		}
 		spawn_in_pipe(from);
+		close_pipes(NULL);
 		exit_wrap(from->exit_status, from);
 	}
 	if (to)
 	{
 		if (dup2(pipes[0], STDIN_FILENO) == -1)
 			return (PIPEFAIL);
-		close_p(pipes);
-		pipe_recursion(to->next, to);
+		close_pipes(pipes);
+		return (pipe_recursion(to->next, to));
 	}
-	close(STDIN_FILENO);
 	return (wait_pipe(pid, from));
 }
 
@@ -69,7 +76,12 @@ int		eval_pipe(t_cmd_tab *cmd)
 		return (-1);
 	if (pid == 0)
 	{
-		pipe_recursion(cmd->next, cmd);
+		signal(SIGPIPE, SIG_IGN);
+		if (pipe_recursion(cmd->next, cmd) == PIPEFAIL)
+		{
+			ft_dprintf(STDERR_FILENO, "PIPEFAIL");
+			exit_wrap(cmd->exit_status, cmd);
+		}
 		while (cmd->next)
 			cmd = cmd->next;
 		exit_wrap(cmd->exit_status, cmd);
