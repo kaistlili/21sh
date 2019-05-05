@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 11:48:18 by ktlili            #+#    #+#             */
-/*   Updated: 2019/05/05 15:33:43 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/05/05 15:37:36 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int		wait_pipe(pid_t last, t_cmd_tab *cmd)
 {
 	int status;
 
-	unsetsig();
 	waitpid(last, &status, WUNTRACED);
 	while (waitpid(0, NULL, WUNTRACED) > 0)
 		;
