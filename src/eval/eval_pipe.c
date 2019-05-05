@@ -6,18 +6,18 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 11:48:18 by ktlili            #+#    #+#             */
-/*   Updated: 2019/05/03 15:46:04 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/05/05 15:33:43 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_eval.h"
+#include "sig.h"
 
 int		wait_pipe(pid_t last, t_cmd_tab *cmd)
 {
 	int status;
 
-	signal(SIGINT, SIG_DFL);
-	signal(SIGWINCH, SIG_DFL);
+	unsetsig();
 	waitpid(last, &status, WUNTRACED);
 	while (waitpid(0, NULL, WUNTRACED) > 0)
 		;
