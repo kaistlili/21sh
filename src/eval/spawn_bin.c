@@ -6,18 +6,20 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/20 15:11:09 by ktlili            #+#    #+#             */
-/*   Updated: 2019/05/05 17:41:34 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/05/05 17:45:26 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_eval.h"
 #include "hashtable.h"
 #include "builtins.h"
+#include "sig.h"
 
 static int		execve_wrap(t_cmd_tab *cmd)
 {
 	int		ret;
 
+	unsetsig();
 	close_save();
 	if ((ret = handle_redir(cmd->redir_lst, NULL)))
 		exit(1);

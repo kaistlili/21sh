@@ -6,11 +6,12 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 11:48:18 by ktlili            #+#    #+#             */
-/*   Updated: 2019/05/05 17:43:56 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/05/05 17:45:53 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_eval.h"
+#include "sig.h"
 
 static void	close_pipes(int pipes[2])
 {
