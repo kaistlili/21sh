@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 16:14:21 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/29 19:17:27 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/05/05 14:54:21 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,12 @@ t_opt			pf_optnew(void)
 	return (opt);
 }
 
-void			pf_prdel(t_printf *lst)
+void			pf_prdel(t_printf **list)
 {
 	t_printf	*tmp;
+	t_printf	*lst;
 
+	lst = *list;
 	while (lst)
 	{
 		tmp = lst->next;
@@ -54,6 +56,7 @@ void			pf_prdel(t_printf *lst)
 		free(lst);
 		lst = tmp;
 	}
+	*list = NULL;
 }
 
 t_printf		*ft_pushback(t_printf *lst, t_printf *add)
@@ -94,7 +97,7 @@ t_printf		*pf_prnew(char *str, int needconv)
 	if (str)
 	{
 		if (!(lst->var = ft_strdup(str)))
-			pf_prdel(lst);
+			pf_prdel(&lst);
 		free(str);
 	}
 	return (lst);
