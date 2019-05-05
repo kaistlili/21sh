@@ -6,12 +6,11 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/12 21:17:33 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/15 21:51:31 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/05/05 15:19:10 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "readline.h"
-
 
 t_list	*get_choice(t_rdl *rdl, t_autocomplete acp)
 {
