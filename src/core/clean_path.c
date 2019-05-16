@@ -23,22 +23,26 @@ static char	*next_dir(char *path)
 	int i;
 
 	i = 0;
+	while(path[i] == '/')
+		i++;
 	while ((path[i] != 0) && (path[i] != '/'))
 		i++;
 	if (path[i] == '/')
-		return (&path[i + 1]);
+		return (&path[i ]);
 	return (&path[i]);
 }
 
 
-static void	delete_prev(char *start)
+static void	recursive(char *start)
 {
 	char	*dest;
 	char	*src;
 	int		len;
 
-	if (ft_strncmp(start, "../", 3))
-		return;
+	if (!ft_strncmp(start, "../", 3))
+		recursive(start + 3);
+	else
+		return ;
 	dest = start;
 	if (start[3] == 0)
 	{
@@ -58,10 +62,12 @@ void		cleandotdot(char *path)
 
 	ft_strrev(path);
 	i = 0;
+	if (!ft_strncmp(path, "../", 3))
+		recursive(path);
 	while (path[i] != 0)
 	{
-		if (!ft_strncmp(path + i, "../", 3))
-			delete_prev(&path[i]);
+		if (!ft_strncmp(path + i, "/../", 4))
+			recursive(&path[i + 1]);
 		else
 			i++;
 	}

@@ -14,8 +14,9 @@
 
 static void		canon_form(char *curpath)
 {
-	cleanpath(curpath);
+//	cleanpath(curpath);
 	cleandotdot(curpath);
+	cleanpath(curpath);
 }
 
 static	void	free_buffers(char *pwd, char *curpath)
