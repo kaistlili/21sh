@@ -20,7 +20,11 @@ static char	**cpy_array(char **to, char **from)
 	while (from[i])
 	{
 		if (!(to[i] = ft_strdup(from[i])))
+		{
+			free_tab(from);
+			free_tab(to);
 			return (NULL);
+		}
 		i++;
 	}
 	return (to);

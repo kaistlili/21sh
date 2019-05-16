@@ -12,7 +12,7 @@
 
 #include "builtins.h"
 
-int		cd_error(int errnum, char *str)
+int		cd_error(int errnum, char *arg)
 {
 	if (errnum == 1)
 		putstr_stderr("cd: Pathname too long");
@@ -24,13 +24,13 @@ int		cd_error(int errnum, char *str)
 		putstr_stderr("cd: HOME not set");
 	else if (errnum == 5)
 		putstr_stderr("cd: Not a directory: ");
-	if (str != NULL)
-		putstr_stderr(str);
+	if (arg != NULL)
+		putstr_stderr(arg);
 	putstr_stderr("\n");
 	return (0);
 }
 
-int		cd_dispatch_err(char *arg, char *curpath)
+int		cd_dispatch_err(char *arg, char *curpath, int freep)
 {
 	int ret;
 
@@ -38,6 +38,8 @@ int		cd_dispatch_err(char *arg, char *curpath)
 		arg = curpath;
 	if ((ret = path_access(curpath)) != 0)
 		cd_error(ret, arg);
+	if ((freep) && (curpath))
+		free(curpath);
 	return (ret);
 }
 
@@ -69,3 +71,17 @@ char	*getoldpwd(void)
 	ft_printf("%s\n", oldpwd);
 	return (oldpwd);
 }
+
+char	*handle_abs_path(char *pwd, char *curpath)
+{
+	char *tmp;
+
+	tmp = curpath;
+	curpath = ft_strjoin(pwd, curpath);
+	ft_strdel(&tmp);
+	if (!curpath)
+		return (NULL);
+	return (curpath);
+
+}
+

@@ -90,12 +90,17 @@ t_cmd_tab	*expand_simple_cmd(t_simple_cmd *before)
 	if (!(after = ft_memalloc(sizeof(t_cmd_tab))))
 		return (NULL);
 	if (expand_token_lst(before) == MEMERR)
+	{
+		free_cmd_tab(after);
 		return (NULL);
+	}
 	extract_assign(before);
-	if (!(after->av = tokens_to_str(before->word_lst)))
+	if ((!(after->av = tokens_to_str(before->word_lst)))
+		|| (!(after->assign_lst = tokens_to_str(before->assign_lst))))
+	{
+		free_cmd_tab(after);
 		return (NULL);
-	if (!(after->assign_lst = tokens_to_str(before->assign_lst)))
-		return (NULL);
+	}
 	after->redir_lst = before->redir_lst;
 	return (after);
 }

@@ -98,7 +98,7 @@ int			change_dir(t_cmd_tab *cmd)
 	if ((curpath == NULL) || (handle_cdpath(&curpath) == MEMERR))
 		return (MEMERR);
 	if (ft_strlen(curpath) > PATH_MAX)
-		return (cd_error(1, NULL));
+		return (cd_dispatch_err(NULL, curpath, 1));
 	if (opt == 'P')
 		return (cd_p(curpath, cmd->av[g_optind]));
 	else if (opt == 'L')

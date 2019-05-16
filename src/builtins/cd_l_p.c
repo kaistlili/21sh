@@ -50,26 +50,22 @@ char			*handle_pwd_l(void)
 int				cd_l(char *curpath, char *arg)
 {
 	char	*pwd;
-	char	*tmp;
 	int		ret;
 
 	pwd = handle_pwd_l();
 	if ((curpath[0] != '/') && pwd)
 	{
-		if (add_slash(&pwd))
-			return (MEMERR);
-		tmp = curpath;
-		curpath = ft_strjoin(pwd, curpath);
-		ft_strdel(&tmp);
-		if (!curpath)
+		if ((add_slash(&pwd))
+			|| (!(curpath = handle_abs_path(pwd, curpath))))
+		{
 			free(pwd);
-		if (!curpath)
 			return (MEMERR);
+		}
 	}
 	canon_form(curpath);
 	ret = 0;
 	if (chdir(curpath))
-		ret = cd_dispatch_err(arg, curpath);
+		ret = cd_dispatch_err(arg, curpath, 0);
 	else
 		update_env_pwd(pwd, curpath);
 	free_buffers(pwd, curpath);
@@ -84,7 +80,7 @@ int				cd_p(char *curpath, char *arg)
 	tmp_pwd = get_env_value("PWD");
 	if (chdir(curpath))
 	{
-		cd_dispatch_err(arg, curpath);
+		cd_dispatch_err(arg, curpath, 1);
 		return (0);
 	}
 	old_pwd = getcwd(NULL, 0);

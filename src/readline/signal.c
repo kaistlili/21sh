@@ -19,7 +19,6 @@ t_signal g_sig[] =\
 {
 	{SIGINT, &nothing},
 	{SIGQUIT, &sigcatch},
-	{SIGSTOP, &sigcatch},
 	{SIGWINCH, &resize},
 	{0, sigcatch}
 };

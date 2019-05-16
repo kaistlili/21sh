@@ -52,8 +52,8 @@ int						parser_takeopt(char *opt, char *arg, char *in,
 							char *name);
 int						cd_l(char *curpath, char *arg);
 int						cd_p(char *curpath, char *arg);
-int						cd_dispatch_err(char *arg, char *curpath);
-int						cd_error(int errnum, char *str);
+int						cd_dispatch_err(char *arg, char *curpath, int free);
+int						cd_error(int errnum, char *arg);
 int						change_dir(t_cmd_tab *cmd);
 
 int						ft_echo(t_cmd_tab *cmd);
@@ -61,4 +61,6 @@ int						ft_echo(t_cmd_tab *cmd);
 int						ft_exit(t_cmd_tab *cmd);
 int						ft_env(t_cmd_tab *cmd);
 int						ft_unsetenv(t_cmd_tab *cmd);
+char					*handle_abs_path(char *pwd, char *curpath);
+
 #endif
