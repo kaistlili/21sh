@@ -24,14 +24,14 @@ int		ft_exit(t_cmd_tab *cmd)
 	{
 		if (cmd->av[2] != NULL)
 		{
-			putstr_stderr("exit: too many arguments\n");
+			ft_dprintf(STDERR_FILENO, "exit: too many arguments\n");
 			return (0);
 		}
 		while (cmd->av[1][i] != 0)
 		{
 			if (!ft_isdigit(cmd->av[1][i]))
 			{
-				putstr_stderr("exit: numeric argument required\n");
+				ft_dprintf(STDERR_FILENO, "exit: numeric argument required\n");
 				return (0);
 			}
 			i++;

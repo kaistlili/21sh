@@ -53,7 +53,7 @@ SRC_FILE =	builtins/cd_l_p.c			\
 			core/main.c					\
 			core/path_tools.c			\
 			core/util.c					\
-			core/util2.c				\
+			core/free_util.c			\
 			core/envadd.c				\
 			core/env.c					\
 			core/envdel.c				\

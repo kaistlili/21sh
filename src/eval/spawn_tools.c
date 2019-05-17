@@ -42,20 +42,17 @@ void	free_cmd_tab_lst(t_cmd_tab *start)
 void	exec_error(int errnum, char *str)
 {
 	if (errnum == BIN_NO_PATH)
-		putstr_stderr("21sh: PATH not set: ");
+		ft_dprintf(STDERR_FILENO, "21sh: PATH not set: %s\n", str);
 	else if (errnum == CMD_NOT_FOUND)
-		putstr_stderr("21sh: command not found: ");
+		ft_dprintf(STDERR_FILENO, "21sh: command not found: %s\n", str);
 	else if (errnum == BIN_PERM_DENY)
-		putstr_stderr("21sh: permission denied: ");
+		ft_dprintf(STDERR_FILENO, "21sh: permission denied: %s\n", str);
 	else if (errnum == BIN_NOT_FOUND)
-		putstr_stderr("21sh: no such file or directory: ");
+		ft_dprintf(STDERR_FILENO, "21sh: no such file or directory: %s\n", str);
 	else if (errnum == BIN_EXEC_ERR)
-		putstr_stderr("21sh: exec error: ");
+		ft_dprintf(STDERR_FILENO, "21sh: exec error: %s\n", str);
 	else if (errnum == BIN_IS_DIR)
-		putstr_stderr("21sh: is a directory: ");
-	if (str != NULL)
-		putstr_stderr(str);
-	putstr_stderr("\n");
+		ft_dprintf(STDERR_FILENO, "21sh: is a directory: %s\n", str);
 }
 
 int		bin_perm(char *path)

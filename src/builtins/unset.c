@@ -16,7 +16,7 @@ static int	error_handle(t_cmd_tab *cmd)
 {
 	if (cmd->av[1] == NULL)
 	{
-		putstr_stderr("usage: unsetenv [NAME] ..\n");
+		ft_dprintf(STDERR_FILENO, "usage: unsetenv [NAME] ..\n");
 		return (-1);
 	}
 	if (cmd->av[1][0] == 0)

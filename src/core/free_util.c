@@ -12,25 +12,6 @@
 
 #include "sh_core.h"
 
-void	dispatch_parse_err(int error)
-{
-	if (error == 1)
-	{
-		ft_printf("21sh: malloc error\n");
-		exit(1);
-	}
-	else if (error == 2)
-		ft_printf("21sh: syntax error\n");
-}
-
-void	putstr_stderr(char *str)
-{
-	int len;
-
-	len = ft_strlen(str);
-	write(2, str, len);
-}
-
 void	free_tab_bytes(char **tab)
 {
 	int	i;

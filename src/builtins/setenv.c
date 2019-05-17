@@ -30,7 +30,7 @@ int	setenv_wrapper(t_cmd_tab *cmd)
 	}
 	if ((cmd->av[1][0] == 0) || (!valid_env_name(cmd->av[1])))
 	{
-		putstr_stderr("setenv: variable name is invalid\n");
+		ft_dprintf(STDERR_FILENO, "setenv: variable name is invalid\n");
 		return (-1);
 	}
 	i = 0;
@@ -39,7 +39,7 @@ int	setenv_wrapper(t_cmd_tab *cmd)
 		i++;
 		if (i > 3)
 		{
-			putstr_stderr("setenv: Too many arguments\n");
+			ft_dprintf(STDERR_FILENO, "setenv: Too many arguments\n");
 			return (-1);
 		}
 	}
