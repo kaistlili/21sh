@@ -27,6 +27,8 @@ int	path_access(char *path)
 {
 	struct stat target_data;
 
+	if (ft_strlen(path) > PATH_MAX)
+		return (1);
 	if (stat(path, &target_data) != 0)
 		return (2);
 	if (!S_ISDIR(target_data.st_mode))

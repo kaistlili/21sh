@@ -46,7 +46,7 @@ SRC_FILE =	builtins/cd_l_p.c			\
 			builtins/setenv.c			\
 			builtins/unset.c			\
 			builtins/parser_tools.c		\
-			core/clean_path.c			\
+			builtins/clean_path.c		\
 			core/env_handler.c			\
 			core/ft_env.c				\
 			core/ft_env_tools.c			\

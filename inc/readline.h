@@ -144,7 +144,7 @@ int					hstnchc(t_rdl *rdl, char *buf);
 int					hstdelcara(t_rdl *rdl, char	*buf);
 t_list				*hst_getcmp(t_list *lst, char *s);
 t_list				*hst_pgetcmp(t_list *lst, char *s);
-void				hstdellast();
+void				hstdellast(void);
 
 int					cmdisincurs(t_rdl *rdl);
 #endif

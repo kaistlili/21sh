@@ -14,7 +14,6 @@
 
 static void		canon_form(char *curpath)
 {
-//	cleanpath(curpath);
 	cleandotdot(curpath);
 	cleanpath(curpath);
 }
@@ -26,7 +25,7 @@ static	void	free_buffers(char *pwd, char *curpath)
 	free(curpath);
 }
 
-char			*handle_pwd_l(void)
+int			handle_pwd_l(char **pwd)
 {
 	char *env_pwd;
 	char *p_pwd;
@@ -36,16 +35,19 @@ char			*handle_pwd_l(void)
 	if (!(p_pwd = getcwd(NULL, 0)))
 		ft_dprintf(STDERR_FILENO, "21sh : cd : error getting current dir \n");
 	if ((p_pwd == NULL) && (env_pwd == NULL))
-		return (NULL);
+	{
+		*pwd = NULL;
+		return (0);
+	}
+	*pwd = p_pwd;
 	if (env_pwd && (!path_access(env_pwd)))
 	{
 		if (!(ret = ft_strdup(env_pwd)))
-			return (p_pwd);
-		if (p_pwd)
-			free(p_pwd);
-		return (ret);
+			return (MEMERR);
+		ft_strdel(&p_pwd);
+		*pwd = ret;
 	}
-	return (p_pwd);
+	return (0);
 }
 
 int				cd_l(char *curpath, char *arg)
@@ -53,7 +55,8 @@ int				cd_l(char *curpath, char *arg)
 	char	*pwd;
 	int		ret;
 
-	pwd = handle_pwd_l();
+	if (handle_pwd_l(&pwd))
+		return (MEMERR);
 	if ((curpath[0] != '/') && pwd)
 	{
 		if ((add_slash(&pwd))

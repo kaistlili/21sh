@@ -15,18 +15,15 @@
 int		cd_error(int errnum, char *arg)
 {
 	if (errnum == 1)
-		putstr_stderr("cd: Pathname too long");
+		ft_dprintf(STDERR_FILENO, "cd: Pathname too long : %s\n", arg);
 	else if (errnum == 2)
-		putstr_stderr("cd : no such file or directory: ");
+		ft_dprintf(STDERR_FILENO, "cd : no such file or directory: %s\n", arg);
 	else if (errnum == 3)
-		putstr_stderr("cd: permission denied: ");
+		ft_dprintf(STDERR_FILENO, "cd: permission denied: %s\n", arg);
 	else if (errnum == 4)
-		putstr_stderr("cd: HOME not set");
+		ft_dprintf(STDERR_FILENO, "cd: HOME not set\n");
 	else if (errnum == 5)
-		putstr_stderr("cd: Not a directory: ");
-	if (arg != NULL)
-		putstr_stderr(arg);
-	putstr_stderr("\n");
+		ft_dprintf(STDERR_FILENO, "cd: Not a directory: %s\n", arg);
 	return (0);
 }
 

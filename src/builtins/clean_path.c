@@ -81,12 +81,12 @@ void		cleandotdot(char *path)
 
 void		cleanpath(char *str)
 {
-	char	buffer[1025];
+	char	buffer[PATH_MAX];
 	int		i;
 	int		j;
 
 	init_iterator(&i, &j);
-	ft_bzero(buffer, 1025);
+	ft_bzero(buffer, PATH_MAX);
 	while (str[i] != 0)
 	{
 		buffer[j] = str[i];
