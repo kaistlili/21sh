@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 13:58:14 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/25 18:26:35 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/05/06 15:13:27 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,9 @@ static int	spawn_wrap(t_cmd_tab *cmd)
 	int ret;
 
 	ret = spawn_command(cmd);
-	free(cmd->full_path);
+	if (cmd->full_path)
+		free(cmd->full_path);
+	cmd->full_path = NULL;
 	return (ret);
 }
 
@@ -62,6 +64,8 @@ static int	spawn_new_env(char **args, char **new_env)
 		if ((ret = pathfinder(&new_cmd)))
 			return (ret);
 	}
+	if (!new_cmd.full_path)
+		return (0);
 	return (spawn_wrap(&new_cmd));
 }
 

@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/20 15:11:09 by ktlili            #+#    #+#             */
-/*   Updated: 2019/05/05 17:45:26 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/05/20 14:12:23 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ static int		execve_wrap(t_cmd_tab *cmd)
 		exit(1);
 	if ((!cmd->full_path))
 		exit_wrap(CMD_NOT_FOUND, cmd);
-	signal(SIGPIPE, SIG_DFL);
 	ret = execve(cmd->full_path, cmd->av, cmd->process_env);
 	ft_dprintf(2, "21sh: bad file format\n");
 	exit_wrap(ret, cmd);

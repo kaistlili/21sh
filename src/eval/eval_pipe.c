@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 11:48:18 by ktlili            #+#    #+#             */
-/*   Updated: 2019/05/05 18:56:45 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/05/20 14:12:14 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ int				eval_pipe(t_cmd_tab *cmd)
 		return (-1);
 	if (pid == 0)
 	{
-		signal(SIGPIPE, SIG_IGN);
 		if (pipe_recursion(cmd->next, cmd) == PIPEFAIL)
 		{
 			ft_dprintf(STDERR_FILENO, "PIPEFAIL");

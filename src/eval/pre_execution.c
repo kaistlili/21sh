@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 20:19:10 by ktlili            #+#    #+#             */
-/*   Updated: 2019/05/03 15:40:05 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/05/06 15:17:40 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ int				pre_execution(t_cmd_tab *cmd)
 	if ((!cmd->process_env)
 			&& (!(cmd->process_env = craft_env(g_sh.env, cmd->assign_lst))))
 		return (MEMERR);
-	if (get_path(cmd) == MEMERR)
+	if ((!cmd->full_path) && (get_path(cmd) == MEMERR))
 		return (MEMERR);
 	if (!cmd->full_path)
 		cmd->exit_status = CMD_NOT_FOUND;
