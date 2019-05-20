@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 20:01:43 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/29 21:54:54 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/05/20 14:17:36 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,14 @@ static char	*next_dir(char *path)
 	int i;
 
 	i = 0;
-	while(path[i] == '/')
+	while (path[i] == '/')
 		i++;
 	while ((path[i] != 0) && (path[i] != '/'))
 		i++;
 	if (path[i] == '/')
-		return (&path[i ]);
+		return (&path[i]);
 	return (&path[i]);
 }
-
 
 static void	recursive(char *start)
 {

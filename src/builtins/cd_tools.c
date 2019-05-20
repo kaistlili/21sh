@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 20:08:33 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/04 13:59:17 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/05/20 14:15:33 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,4 @@ char	*handle_abs_path(char *pwd, char *curpath)
 	if (!curpath)
 		return (NULL);
 	return (curpath);
-
 }
-
