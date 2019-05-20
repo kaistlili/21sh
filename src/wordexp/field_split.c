@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 12:46:44 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/12 15:26:42 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/05/20 14:54:12 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ t_token		*ifs_next_fields(t_token **word, t_token *word_2,
 	t_token *iter;
 	char	*new_field;
 
-	word_2 = word_2 + 5;
+	(void)word_2;
 	iter = ((*word)->next != NULL) ? (*word)->next : (*word);
 	while (*value)
 	{
