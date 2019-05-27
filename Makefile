@@ -6,7 +6,7 @@
 #    By: apeyret <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/05/05 15:14:02 by apeyret          ###   ########.fr        #
+#    Updated: 2019/05/20 16:22:40 by ktlili           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME =		21sh
 
 CC =		clang	
 
-CFLAGS =	-I inc/ -I libft/inc/ -Wall -Werror -Wextra -ggdb
+CFLAGS =	-I inc/ -I libft/inc/ -Wall -Werror -Wextra
 
 INC_DIR =	inc
 

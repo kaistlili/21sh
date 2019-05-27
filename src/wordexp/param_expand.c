@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 20:19:43 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/12 15:26:34 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/05/27 14:09:46 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int				expand_param(t_token **word, char **cursor,
 		i = *cursor - (*word)->data.str;
 		if (c_insert_str(*word, *cursor, value) == MEMERR)
 			return (MEMERR);
-		*cursor = (*word)->data.str + i + strlen(value);
+		*cursor = (*word)->data.str + i + ft_strlen(value);
 		return (0);
 	}
 	return (handle_ifs(word, cursor, value, ifs));

@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 14:08:52 by apeyret           #+#    #+#             */
-/*   Updated: 2019/01/16 14:10:00 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/05/20 16:00:05 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ t_opt	pf_lensign(t_printf *lst, t_opt opt)
 {
 	(ft_cisin(lst->settings, '+')) ? ft_strcpy(opt.sign, "+") : 0;
 	(ft_cisin(lst->var, '-')) ? ft_strcpy(opt.sign, "-") : 0;
-	(ft_cisin(lst->var, '-') || ft_cisin(lst->settings, '+')) ?
-		opt.nb_sig = 1 : 0;
+	(ft_cisin(lst->var, '-') || ft_cisin(lst->settings, '+'))
+		? opt.nb_sig = 1 : 0;
 	return (opt);
 }
 

@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 14:08:47 by apeyret           #+#    #+#             */
-/*   Updated: 2019/01/16 14:09:58 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/05/20 15:59:33 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,8 @@ char				*pf_ftoa(t_printf *lst, double n)
 		lst->var[i++] = '-';
 	copy(lst->var, &i, ipart, ft_pow(10, len - 1));
 	lst->var[i++] = '.';
-	dpart = ((long long)((dpart - (long long)dpart) * 10) > 5) ?
-		dpart + 1 : dpart;
+	dpart = ((long long)((dpart - (long long)dpart) * 10) > 5)
+		? dpart + 1 : dpart;
 	copy(lst->var, &i, dpart, ft_pow(10, p - 1));
 	return (lst->var);
 }
