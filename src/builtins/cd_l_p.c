@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 19:24:29 by ktlili            #+#    #+#             */
-/*   Updated: 2019/05/20 14:15:49 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/05/29 14:07:28 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int				handle_pwd_l(char **pwd)
 		return (0);
 	}
 	*pwd = p_pwd;
-	if (env_pwd && (!path_access(env_pwd)))
+	if (env_pwd)
 	{
 		if (!(ret = ft_strdup(env_pwd)))
 			return (MEMERR);

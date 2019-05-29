@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 20:08:33 by ktlili            #+#    #+#             */
-/*   Updated: 2019/05/20 14:15:33 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/05/29 14:07:14 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ void	update_env_pwd(char *pwd, char *curpath)
 			set_shell_env("PWD", pwd, 1);
 			free(pwd);
 		}
+		else
+			ft_dprintf(STDERR_FILENO, "21sh: cd : error updating PWD\n");
 	}
 }
 
